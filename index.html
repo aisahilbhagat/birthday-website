@@ -938,6 +938,7 @@
         });
         
         // Close mobile menu when clicking on a link
+        // Note: The nav menu is commented out in the HTML, so this won't have an effect unless restored.
         document.querySelectorAll('nav a').forEach(link => {
             link.addEventListener('click', () => {
                 navMenu.classList.remove('active');
@@ -993,21 +994,53 @@
             }
         }
         
-        // Submit Message Form
-        submitMessage.addEventListener('click', () => {
+        // Submit Message Form - UPDATED
+        submitMessage.addEventListener('click', async () => {
             const name = senderName.value.trim();
             const message = messageText.value.trim();
-            
-            if (name && message) {
-                // Create new message card
+
+            if (!name || !message) {
+                // Using the better UI feedback from the original file instead of alert()
+                submitMessage.textContent = 'Please fill in all fields';
+                submitMessage.style.backgroundColor = '#F44336';
+                setTimeout(() => {
+                    submitMessage.textContent = 'Send Birthday Wishes';
+                    submitMessage.style.backgroundColor = '';
+                }, 2000);
+                return;
+            }
+
+            try {
+                const res = await fetch('/.netlify/functions/addComment', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, message }),
+                });
+
+                if (!res.ok) {
+                    let errorMessage = "Error sending message";
+                    try {
+                        const data = await res.json();
+                        errorMessage = data.message || data.error || JSON.stringify(data);
+                    } catch (e) {
+                        errorMessage = await res.text() || "Error sending message";
+                    }
+                    
+                    submitMessage.textContent = 'Error: Please try again';
+                    submitMessage.style.backgroundColor = '#F44336';
+                    console.error("Server Error:", errorMessage);
+                    setTimeout(() => {
+                        submitMessage.textContent = 'Send Birthday Wishes';
+                        submitMessage.style.backgroundColor = '';
+                    }, 3000);
+                    return;
+                }
+                
+                // Append message to frontend with animation
                 const messageCard = document.createElement('div');
                 messageCard.className = 'message-card';
-                messageCard.innerHTML = `
-                    <h4>From ${name}</h4>
-                    <p>${message}</p>
-                `;
+                messageCard.innerHTML = `<h4>From ${name}</h4><p>${message}</p>`;
                 
-                // Add to message list with animation
                 messageCard.style.opacity = '0';
                 messageCard.style.transform = 'translateY(20px)';
                 messageList.appendChild(messageCard);
@@ -1017,24 +1050,23 @@
                     messageCard.style.opacity = '1';
                     messageCard.style.transform = 'translateY(0)';
                 }, 10);
-                
-                // Clear form
+
                 senderName.value = '';
                 messageText.value = '';
                 
-                // Show success feedback
+                // Using the better UI feedback from the original file instead of alert()
                 submitMessage.textContent = 'Message Sent!';
                 submitMessage.style.backgroundColor = '#4CAF50';
-                
                 setTimeout(() => {
                     submitMessage.textContent = 'Send Birthday Wishes';
                     submitMessage.style.backgroundColor = '';
                 }, 2000);
-            } else {
-                // Show error feedback
-                submitMessage.textContent = 'Please fill in all fields';
+
+            } catch (err) {
+                console.error("Fetch Error:", err);
+                // Using the better UI feedback from the original file instead of alert()
+                submitMessage.textContent = 'Failed to send';
                 submitMessage.style.backgroundColor = '#F44336';
-                
                 setTimeout(() => {
                     submitMessage.textContent = 'Send Birthday Wishes';
                     submitMessage.style.backgroundColor = '';
