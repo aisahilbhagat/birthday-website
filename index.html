@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, Sweet Cousin!</title>
+    <!-- Google Fonts for fun typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">-
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* CSS Variables for consistent theming */
+        :root {
+            --primary-pink: #FFB6C1;
+            --primary-purple: #E6E6FA;
+            --primary-blue: #ADD8E6;
+            --primary-yellow: #FFFFE0;
+            --text-dark: #333;
+            --text-light: #666;
+            --white: #FFFFFF;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, var(--primary-pink), var(--primary-purple));
+            color: var(--text-dark);
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            padding: 20px;
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Bubblegum Sans', cursive;
+            font-size: 1.8rem;
+            color: var(--primary-pink);
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            animation: bounce 2s infinite;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        nav ul li a:hover {
+            color: var(--primary-pink);
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary-pink);
+            transition: width 0.3s ease;
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            padding: 60px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero h1 {
+            font-family: 'Bubblegum Sans', cursive;
+            font-size: 4rem;
+            color: var(--white);
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            animation: fadeInDown 1s ease;
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            color: var(--white);
+            max-width: 800px;
+            margin: 0 auto 30px;
+            animation: fadeInUp 1s ease 0.5s both;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            animation: fadeInUp 1s ease 1s both;
+        }
+        
+        .btn {
+            padding: 12px 30px;
+            background-color: var(--white);
+            color: var(--primary-pink);
+            border: none;
+            border-radius: 50px;
+            font-family: 'Bubblegum Sans', cursive;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+        
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--white);
+            color: var(--primary-pink);
+        }
+        
+        /* Floating Balloons */
+        .balloon-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .balloon {
+            position: absolute;
+            width: 80px;
+            height: 100px;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            opacity: 0.8;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .balloon:nth-child(1) {
+            background-color: rgba(255, 182, 193, 0.8);
+            left: 5%;
+            animation-delay: 0s;
+        }
+        
+        .balloon:nth-child(2) {
+            background-color: rgba(173, 216, 230, 0.8);
+            left: 15%;
+            animation-delay: 1s;
+        }
+        
+        .balloon:nth-child(3) {
+            background-color: rgba(230, 230, 250, 0.8);
+            left: 25%;
+            animation-delay: 2s;
+        }
+        
+        .balloon:nth-child(4) {
+            background-color: rgba(255, 255, 224, 0.8);
+            left: 35%;
+            animation-delay: 3s;
+        }
+        
+        .balloon:nth-child(5) {
+            background-color: rgba(255, 182, 193, 0.8);
+            left: 45%;
+            animation-delay: 4s;
+        }
+        
+        .balloon:nth-child(6) {
+            background-color: rgba(173, 216, 230, 0.8);
+            left: 55%;
+            animation-delay: 5s;
+        }
+        
+        .balloon:nth-child(7) {
+            background-color: rgba(230, 230, 250, 0.8);
+            left: 65%;
+            animation-delay: 6s;
+        }
+        
+        .balloon:nth-child(8) {
+            background-color: rgba(255, 255, 224, 0.8);
+            left: 75%;
+            animation-delay: 7s;
+        }
+        
+        .balloon:nth-child(9) {
+            background-color: rgba(255, 182, 193, 0.8);
+            left: 85%;
+            animation-delay: 8s;
+        }
+        
+        .balloon:nth-child(10) {
+            background-color: rgba(173, 216, 230, 0.8);
+            left: 95%;
+            animation-delay: 9s;
+        }
+        
+        .balloon::after {
+            content: '';
+            position: absolute;
+            width: 1px;
+            height: 80px;
+            background-color: #999;
+            left: 50%;
+            bottom: -80px;
+        }
+        
+        /* Animated Balloons for Start Celebration Button */
+        .animated-balloon {
+            position: fixed;
+            width: 60px;
+            height: 75px;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            opacity: 0.8;
+            z-index: 1000;
+            pointer-events: none;
+        }
+        
+        .animated-balloon::after {
+            content: '';
+            position: absolute;
+            width: 1px;
+            height: 60px;
+            background-color: #999;
+            left: 50%;
+            bottom: -60px;
+        }
+        
+        /* Section Styles */
+        section {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            font-family: 'Bubblegum Sans', cursive;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--text-dark);
+        }
+        
+        /* Photo Gallery */
+        .photo-gallery {
+            background-color: var(--white);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            height: 250px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .gallery-item .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: var(--transition);
+        }
+        
+        .gallery-item:hover .overlay {
+            opacity: 1;
+        }
+        
+        .gallery-item .overlay i {
+            color: var(--white);
+            font-size: 2rem;
+        }
+        
+        /* Hobbies Section */
+        .hobbies {
+            background-color: var(--primary-yellow);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+        }
+        
+        .hobby-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .hobby-card {
+            background-color: var(--white);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        
+        .hobby-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .hobby-card i {
+            font-size: 3rem;
+            color: var(--primary-pink);
+            margin-bottom: 15px;
+        }
+        
+        .hobby-card h3 {
+            font-family: 'Bubblegum Sans', cursive;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        
+        /* Messages Section */
+        .messages {
+            background-color: var(--white);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+        }
+        
+        .message-form {
+            max-width: 600px;
+            margin: 0 auto 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .message-form input,
+        .message-form textarea {
+            padding: 15px;
+            border: 2px solid var(--primary-blue);
+            border-radius: 10px;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        .message-form input:focus,
+        .message-form textarea:focus {
+            outline: none;
+            border-color: var(--primary-pink);
+        }
+        
+        .message-form textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        .message-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .message-card {
+            background-color: var(--primary-blue);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .message-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .message-card h4 {
+            font-family: 'Bubblegum Sans', cursive;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+        
+        .message-card p {
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+        
+        /* Final Surprise Section */
+        .surprise {
+            background-color: var(--white);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .surprise-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .surprise h2 {
+            font-family: 'Bubblegum Sans', cursive;
+            font-size: 3rem;
+            color: var(--primary-pink);
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: scale(0.5);
+        }
+        
+        .surprise.revealed h2 {
+            animation: surpriseReveal 1s ease forwards;
+        }
+        
+        .surprise p {
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            margin-bottom: 30px;
+            opacity: 0;
+        }
+        
+        .surprise.revealed p {
+            animation: fadeIn 1s ease 0.5s forwards;
+        }
+        
+        .surprise-btn {
+            padding: 15px 40px;
+            background-color: var(--primary-pink);
+            color: var(--white);
+            border: none;
+            border-radius: 50px;
+            font-family: 'Bubblegum Sans', cursive;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+        
+        .surprise-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .surprise-btn.new-surprise {
+            background-color: #8B4789; /* Darker purple color */
+            margin-top: 20px;
+        }
+        
+        .surprise-btn.new-surprise:hover {
+            background-color: #6B3569; /* Even darker on hover */
+        }
+        
+        /* Confetti Container */
+        .confetti-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: var(--primary-pink);
+            opacity: 0;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--text-dark);
+            color: var(--white);
+            text-align: center;
+            padding: 20px;
+        }
+        
+        footer p {
+            margin-bottom: 10px;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .social-links a {
+            color: var(--white);
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            color: var(--primary-pink);
+            transform: translateY(-5px);
+        }
+        
+        /* Animations */
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(-5deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(5deg);
+            }
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes surpriseReveal {
+            from {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        @keyframes confettiFall {
+            0% {
+                opacity: 1;
+                transform: translateY(-100vh) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(100vh) rotate(720deg);
+            }
+        }
+        
+        @keyframes balloonRise {
+            0% {
+                transform: translateY(100vh) rotate(-5deg);
+                opacity: 0.8;
+            }
+            10% {
+                opacity: 0.9;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(5deg);
+                opacity: 0;
+            }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            nav ul {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background-color: var(--white);
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                padding-top: 50px;
+                transition: left 0.3s ease;
+            }
+            
+            nav ul.active {
+                left: 0;
+            }
+            
+            nav ul li {
+                margin: 15px 0;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+            
+            .hobby-cards {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+            
+            .message-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .surprise h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <i class="fas fa-birthday-cake"></i>
+            Birthday Celebration
+        </div>
+        <div class="menu-toggle" id="menuToggle">
+            <i class="fas fa-bars"></i>
+        </div>
+        <!-- <nav>
+            <ul id="navMenu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#hobbies">Hobbies</a></li>
+                <li><a href="#messages">Messages</a></li>
+                <li><a href="#surprise">Surprise!</a></li>
+            </ul>
+        </nav> -->
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="balloon-container">
+            <div class="balloon"></div>
+            <div class="balloon"></div>
+            <div class="balloon"></div>
+            <div class="balloon"></div>
+            <div class="balloon"></div>
+            <div class="balloon"></div>
+            <div class="balloon"></div>
+            <div class="balloon"></div>
+            <div class="balloon"></div>
+            <div class="balloon"></div>
+        </div>
+        <h1>Happy Birthday, Akanksha!</h1>
+        <p>Today is all about celebrating you! May your special day be filled with laughter, joy, and wonderful memories that last a lifetime.</p>
+        <div class="hero-buttons">
+            <button class="btn" id="startCelebration">Start Celebration</button>
+            <button class="btn btn-secondary" id="playMusic">Play Music</button>
+        </div>
+    </section>
+    
+    <!-- Photo Gallery Section -->
+    <section class="photo-gallery" id="gallery">
+        <h2 class="section-title">Memorable Moments</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="https://picsum.photos/seed/birthday1/400/300.jpg" alt="Memory 1">
+                <div class="overlay">
+                    <i class="fas fa-heart"></i>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://picsum.photos/seed/birthday2/400/300.jpg" alt="Memory 2">
+                <div class="overlay">
+                    <i class="fas fa-heart"></i>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://picsum.photos/seed/birthday3/400/300.jpg" alt="Memory 3">
+                <div class="overlay">
+                    <i class="fas fa-heart"></i>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://picsum.photos/seed/birthday4/400/300.jpg" alt="Memory 4">
+                <div class="overlay">
+                    <i class="fas fa-heart"></i>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://picsum.photos/seed/birthday5/400/300.jpg" alt="Memory 5">
+                <div class="overlay">
+                    <i class="fas fa-heart"></i>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://picsum.photos/seed/birthday6/400/300.jpg" alt="Memory 6">
+                <div class="overlay">
+                    <i class="fas fa-heart"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Hobbies Section - Updated with requested changes -->
+    <section class="hobbies" id="hobbies">
+        <h2 class="section-title">Things You Love</h2>
+        <div class="hobby-cards">
+            <div class="hobby-card">
+                <i class="fas fa-palette"></i>
+                <h3>Art & Creativity</h3>
+                <p>Expressing yourself through colors and imagination</p>
+            </div>
+            <div class="hobby-card">
+                <i class="fas fa-music"></i>
+                <h3>Music</h3>
+                <p>Finding joy in melodies and rhythms</p>
+            </div>
+            <div class="hobby-card">
+                <i class="fas fa-film"></i>
+                <h3>Movies</h3>
+                <p>Getting lost in captivating stories on screen</p>
+            </div>
+            <div class="hobby-card">
+                <i class="fas fa-utensils"></i>
+                <h3>Cooking</h3>
+                <p>Creating delicious treats for loved ones</p>
+            </div>
+            <div class="hobby-card">
+                <i class="fas fa-tv"></i>
+                <h3>Korean Dramas</h3>
+                <p>Binge-watching the latest K-dramas with excitement</p>
+            </div>
+            <div class="hobby-card">
+                <i class="fas fa-headphones"></i>
+                <h3>K-Pop</h3>
+                <p>Dancing and singing along to your favorite K-pop hits</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Messages Section -->
+    <section class="messages" id="messages">
+        <h2 class="section-title">Birthday Wishes</h2>
+        <div class="message-form">
+            <input type="text" id="senderName" placeholder="Your Name">
+            <textarea id="messageText" placeholder="Write your birthday message here..."></textarea>
+            <button class="btn" id="submitMessage">Send Birthday Wishes</button>
+        </div>
+        <div class="message-list" id="messageList">
+            <div class="message-card">
+                <h4>From Mom & Dad</h4>
+                <p>Happy birthday to our wonderful daughter! May your day be as special as you are. We love you more than words can express!</p>
+            </div>
+            <div class="message-card">
+                <h4>From Your Best Friend</h4>
+                <p>Happy birthday, girl! Thanks for all the amazing memories and adventures. Here's to many more! Can't wait to celebrate with you!</p>
+            </div>
+            <div class="message-card">
+                <h4>From Your Sibling</h4>
+                <p>Happy birthday to the best sibling ever! Even though we fight sometimes, I wouldn't trade you for anything. Love you!</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Final Surprise Section -->
+    <section class="surprise" id="surprise">
+        <div class="confetti-container" id="confettiContainer"></div>
+        <div class="surprise-content">
+            <h2 id="surpriseTitle">Ready for Your Birthday Surprise?</h2>
+            <p id="surpriseMessage">Click the button below to reveal your special birthday message!</p>
+            <button class="surprise-btn" id="revealSurprise">Reveal Surprise</button>
+            <button class="surprise-btn new-surprise" id="newSurprise" style="display: none;">Click for Surprise</button>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <p>Made with love for your special day!</p>
+        <!-- <div class="social-links">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-pinterest"></i></a>
+        </div> -->
+    </footer>
+    
+    <!-- Audio Element for Background Music -->
+    <audio id="birthdayMusic" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    
+    <script>
+        // DOM Elements
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+        const startCelebration = document.getElementById('startCelebration');
+        const playMusic = document.getElementById('playMusic');
+        const birthdayMusic = document.getElementById('birthdayMusic');
+        const submitMessage = document.getElementById('submitMessage');
+        const senderName = document.getElementById('senderName');
+        const messageText = document.getElementById('messageText');
+        const messageList = document.getElementById('messageList');
+        const revealSurprise = document.getElementById('revealSurprise');
+        const newSurprise = document.getElementById('newSurprise');
+        const surprise = document.querySelector('.surprise');
+        const surpriseTitle = document.getElementById('surpriseTitle');
+        const surpriseMessage = document.getElementById('surpriseMessage');
+        const confettiContainer = document.getElementById('confettiContainer');
+        
+        // Mobile Menu Toggle
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            menuToggle.innerHTML = navMenu.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+        
+        // Start Celebration Button
+        startCelebration.addEventListener('click', () => {
+            // Create floating balloons effect
+            createFloatingBalloons();
+            
+            // Scroll to gallery section
+            document.getElementById('gallery').scrollIntoView({ behavior: 'smooth' });
+        });
+        
+        // Play Music Button
+        playMusic.addEventListener('click', () => {
+            if (birthdayMusic.paused) {
+                birthdayMusic.play();
+                playMusic.textContent = 'Pause Music';
+                playMusic.classList.add('playing');
+            } else {
+                birthdayMusic.pause();
+                playMusic.textContent = 'Play Music';
+                playMusic.classList.remove('playing');
+            }
+        });
+        
+        // Create Floating Balloons Function
+        function createFloatingBalloons() {
+            const colors = ['#FFB6C1', '#E6E6FA', '#ADD8E6', '#FFFFE0', '#FFDAB9'];
+            
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const balloon = document.createElement('div');
+                    balloon.className = 'animated-balloon';
+                    balloon.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    balloon.style.left = Math.random() * 100 + '%';
+                    balloon.style.bottom = '-100px';
+                    balloon.style.animationDuration = (Math.random() * 3 + 5) + 's';
+                    balloon.style.animationName = 'balloonRise';
+                    balloon.style.animationTimingFunction = 'ease-in-out';
+                    balloon.style.animationFillMode = 'forwards';
+                    
+                    document.body.appendChild(balloon);
+                    
+                    // Remove balloon after animation completes
+                    setTimeout(() => {
+                        balloon.remove();
+                    }, 8000);
+                }, i * 200);
+            }
+        }
+        
+        // Submit Message Form
+        submitMessage.addEventListener('click', () => {
+            const name = senderName.value.trim();
+            const message = messageText.value.trim();
+            
+            if (name && message) {
+                // Create new message card
+                const messageCard = document.createElement('div');
+                messageCard.className = 'message-card';
+                messageCard.innerHTML = `
+                    <h4>From ${name}</h4>
+                    <p>${message}</p>
+                `;
+                
+                // Add to message list with animation
+                messageCard.style.opacity = '0';
+                messageCard.style.transform = 'translateY(20px)';
+                messageList.appendChild(messageCard);
+                
+                setTimeout(() => {
+                    messageCard.style.transition = 'all 0.5s ease';
+                    messageCard.style.opacity = '1';
+                    messageCard.style.transform = 'translateY(0)';
+                }, 10);
+                
+                // Clear form
+                senderName.value = '';
+                messageText.value = '';
+                
+                // Show success feedback
+                submitMessage.textContent = 'Message Sent!';
+                submitMessage.style.backgroundColor = '#4CAF50';
+                
+                setTimeout(() => {
+                    submitMessage.textContent = 'Send Birthday Wishes';
+                    submitMessage.style.backgroundColor = '';
+                }, 2000);
+            } else {
+                // Show error feedback
+                submitMessage.textContent = 'Please fill in all fields';
+                submitMessage.style.backgroundColor = '#F44336';
+                
+                setTimeout(() => {
+                    submitMessage.textContent = 'Send Birthday Wishes';
+                    submitMessage.style.backgroundColor = '';
+                }, 2000);
+            }
+        });
+        
+        // Reveal Surprise Function
+        revealSurprise.addEventListener('click', () => {
+            // Add revealed class to trigger animations
+            surprise.classList.add('revealed');
+            
+            // Update content
+            surpriseTitle.textContent = "Happy Birthday, Akanksha!";
+            surpriseMessage.textContent = "May all your dreams come true and your life be filled with endless joy, love, and laughter. You deserve all the happiness in the world!";
+            
+            // Create confetti effect
+            createConfetti();
+            
+            // Play celebration sound (if available)
+            playSound();
+            
+            // Hide the reveal button and show the new surprise button
+            revealSurprise.style.display = 'none';
+            newSurprise.style.display = 'inline-block';
+        });
+        
+        // New Surprise Button - Opens a new page
+        newSurprise.addEventListener('click', () => {
+            // Open a new page - you can replace this URL with your actual surprise page
+            window.open('surprise.html', '_blank');
+        });
+        
+        // Create Confetti Function
+        function createConfetti() {
+            const colors = ['#FFB6C1', '#E6E6FA', '#ADD8E6', '#FFFFE0', '#FFDAB9', '#98FB98', '#DDA0DD'];
+            
+            for (let i = 0; i < 100; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.width = Math.random() * 10 + 5 + 'px';
+                    confetti.style.height = Math.random() * 10 + 5 + 'px';
+                    confetti.style.animationDuration = Math.random() * 3 + 2 + 's';
+                    confetti.style.animationName = 'confettiFall';
+                    
+                    confettiContainer.appendChild(confetti);
+                    
+                    // Remove confetti after animation completes
+                    setTimeout(() => {
+                        confetti.remove();
+                    }, 5000);
+                }, i * 30);
+            }
+        }
+        
+        // Play Sound Function (placeholder)
+        function playSound() {
+            // In a real implementation, you would play an actual sound file
+            // For this example, we'll just create a visual feedback
+            document.body.style.backgroundColor = '#FFB6C1';
+            setTimeout(() => {
+                document.body.style.backgroundColor = '';
+            }, 300);
+        }
+        
+        // Easter Egg: Secret message when clicking the logo 5 times
+        let logoClickCount = 0;
+        document.querySelector('.logo').addEventListener('click', () => {
+            logoClickCount++;
+            
+            if (logoClickCount === 5) {
+                const secretMessage = document.createElement('div');
+                secretMessage.style.position = 'fixed';
+                secretMessage.style.top = '50%';
+                secretMessage.style.left = '50%';
+                secretMessage.style.transform = 'translate(-50%, -50%)';
+                secretMessage.style.backgroundColor = '#FFB6C1';
+                secretMessage.style.color = 'white';
+                secretMessage.style.padding = '20px';
+                secretMessage.style.borderRadius = '10px';
+                secretMessage.style.fontSize = '1.5rem';
+                secretMessage.style.fontFamily = "'Bubblegum Sans', cursive";
+                secretMessage.style.zIndex = '1000';
+                secretMessage.style.boxShadow = '0 0 20px rgba(0,0,0,0.3)';
+                secretMessage.textContent = "You found the secret message! You're awesome!";
+                
+                document.body.appendChild(secretMessage);
+                
+                setTimeout(() => {
+                    secretMessage.style.transition = 'opacity 1s';
+                    secretMessage.style.opacity = '0';
+                    
+                    setTimeout(() => {
+                        secretMessage.remove();
+                    }, 1000);
+                }, 3000);
+                
+                logoClickCount = 0;
+            }
+        });
+        
+        // Add hover effect to gallery items
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.addEventListener('click', () => {
+                // Create a modal to view the image larger
+                const modal = document.createElement('div');
+                modal.style.position = 'fixed';
+                modal.style.top = '0';
+                modal.style.left = '0';
+                modal.style.width = '100%';
+                modal.style.height = '100%';
+                modal.style.backgroundColor = 'rgba(0,0,0,0.8)';
+                modal.style.display = 'flex';
+                modal.style.justifyContent = 'center';
+                modal.style.alignItems = 'center';
+                modal.style.zIndex = '1000';
+                modal.style.cursor = 'pointer';
+                
+                const img = document.createElement('img');
+                img.src = item.querySelector('img').src;
+                img.style.maxWidth = '90%';
+                img.style.maxHeight = '90%';
+                img.style.borderRadius = '10px';
+                
+                modal.appendChild(img);
+                document.body.appendChild(modal);
+                
+                modal.addEventListener('click', () => {
+                    modal.style.transition = 'opacity 0.5s';
+                    modal.style.opacity = '0';
+                    
+                    setTimeout(() => {
+                        modal.remove();
+                    }, 500);
+                });
+            });
+        });
+        
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', () => {
+            // Add smooth reveal animation to sections as they come into view
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+            
+            document.querySelectorAll('section').forEach(section => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>
