@@ -905,10 +905,11 @@
     </footer>
     
     <!-- Audio Element for Background Music -->
- <audio id="birthdayMusic" loop preload="auto">
+   <audio id="birthdayMusic" loop autoplay preload="auto">
     <source src="Suzume (Lo-Fi).mp3" type="audio/mpeg">
     Your browser does not support the audio element.
 </audio>
+
     
     <script>
         // DOM Elements
@@ -953,22 +954,19 @@
             document.getElementById('gallery').scrollIntoView({ behavior: 'smooth' });
         });
         
-          const birthdayMusic = document.getElementById('birthdayMusic');
-    const playMusic = document.getElementById('playMusic');
-
-    playMusic.addEventListener('click', () => {
-        if (birthdayMusic.paused) {
-            birthdayMusic.play().catch(err => {
-                console.log("Playback failed:", err);
-            });
-            playMusic.textContent = 'Pause Music';
-            playMusic.classList.add('playing');
-        } else {
-            birthdayMusic.pause();
-            playMusic.textContent = 'Play Music';
-            playMusic.classList.remove('playing');
-        }
-    });
+        // Play Music Button
+        playMusic.addEventListener('click', () => {
+            if (birthdayMusic.paused) {
+                birthdayMusic.play();
+                playMusic.textContent = 'Pause Music';
+                playMusic.classList.add('playing');
+            } else {
+                birthdayMusic.pause();
+                playMusic.textContent = 'Play Music';
+                playMusic.classList.remove('playing');
+            }
+        });
+        
         // Create Floating Balloons Function
         function createFloatingBalloons() {
             const colors = ['#FFB6C1', '#E6E6FA', '#ADD8E6', '#FFFFE0', '#FFDAB9'];
