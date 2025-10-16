@@ -918,10 +918,10 @@
         const startCelebration = document.getElementById('startCelebration');
         const playMusic = document.getElementById('playMusic');
         const birthdayMusic = document.getElementById('birthdayMusic');
-        const submitMessage = document.getElementById('submitMessage');
-        const senderName = document.getElementById('senderName');
-        const messageText = document.getElementById('messageText');
-        const messageList = document.getElementById('messageList');
+        // const submitMessage = document.getElementById('submitMessage');
+        // const senderName = document.getElementById('senderName');
+        // const messageText = document.getElementById('messageText');
+        // const messageList = document.getElementById('messageList');
         const revealSurprise = document.getElementById('revealSurprise');
         const newSurprise = document.getElementById('newSurprise');
         const surprise = document.querySelector('.surprise');
@@ -994,53 +994,53 @@
         }
         
         // Submit Message Form
-        submitMessage.addEventListener('click', () => {
-            const name = senderName.value.trim();
-            const message = messageText.value.trim();
+        // submitMessage.addEventListener('click', () => {
+        //     const name = senderName.value.trim();
+        //     const message = messageText.value.trim();
             
-            if (name && message) {
-                // Create new message card
-                const messageCard = document.createElement('div');
-                messageCard.className = 'message-card';
-                messageCard.innerHTML = `
-                    <h4>From ${name}</h4>
-                    <p>${message}</p>
-                `;
+        //     if (name && message) {
+        //         // Create new message card
+        //         const messageCard = document.createElement('div');
+        //         messageCard.className = 'message-card';
+        //         messageCard.innerHTML = `
+        //             <h4>From ${name}</h4>
+        //             <p>${message}</p>
+        //         `;
                 
-                // Add to message list with animation
-                messageCard.style.opacity = '0';
-                messageCard.style.transform = 'translateY(20px)';
-                messageList.appendChild(messageCard);
+        //         // Add to message list with animation
+        //         messageCard.style.opacity = '0';
+        //         messageCard.style.transform = 'translateY(20px)';
+        //         messageList.appendChild(messageCard);
                 
-                setTimeout(() => {
-                    messageCard.style.transition = 'all 0.5s ease';
-                    messageCard.style.opacity = '1';
-                    messageCard.style.transform = 'translateY(0)';
-                }, 10);
+        //         setTimeout(() => {
+        //             messageCard.style.transition = 'all 0.5s ease';
+        //             messageCard.style.opacity = '1';
+        //             messageCard.style.transform = 'translateY(0)';
+        //         }, 10);
                 
-                // Clear form
-                senderName.value = '';
-                messageText.value = '';
+        //         // Clear form
+        //         senderName.value = '';
+        //         messageText.value = '';
                 
-                // Show success feedback
-                submitMessage.textContent = 'Message Sent!';
-                submitMessage.style.backgroundColor = '#4CAF50';
+        //         // Show success feedback
+        //         submitMessage.textContent = 'Message Sent!';
+        //         submitMessage.style.backgroundColor = '#4CAF50';
                 
-                setTimeout(() => {
-                    submitMessage.textContent = 'Send Birthday Wishes';
-                    submitMessage.style.backgroundColor = '';
-                }, 2000);
-            } else {
-                // Show error feedback
-                submitMessage.textContent = 'Please fill in all fields';
-                submitMessage.style.backgroundColor = '#F44336';
+        //         setTimeout(() => {
+        //             submitMessage.textContent = 'Send Birthday Wishes';
+        //             submitMessage.style.backgroundColor = '';
+        //         }, 2000);
+        //     } else {
+        //         // Show error feedback
+        //         submitMessage.textContent = 'Please fill in all fields';
+        //         submitMessage.style.backgroundColor = '#F44336';
                 
-                setTimeout(() => {
-                    submitMessage.textContent = 'Send Birthday Wishes';
-                    submitMessage.style.backgroundColor = '';
-                }, 2000);
-            }
-        });
+        //         setTimeout(() => {
+        //             submitMessage.textContent = 'Send Birthday Wishes';
+        //             submitMessage.style.backgroundColor = '';
+        //         }, 2000);
+        //     }
+        // });
         
         // Reveal Surprise Function
         revealSurprise.addEventListener('click', () => {
